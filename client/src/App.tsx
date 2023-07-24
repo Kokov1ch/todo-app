@@ -1,9 +1,16 @@
 import React from "react";
+import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {Login} from "./components/Login/";
 
-const App = () => {
+
+const App: React.FC = () => {
     return (
-        <div>
-            fet
+        <div className="app-container">
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Login />}/>
+                </Routes>
+            </Router>
         </div>
     );
 };
