@@ -1,7 +1,1 @@
-import React from "react";
-
-export default function signUp(): JSX.Element {
-    return (
-        <div>fet</div>
-    );
-}
+export { default as SignUp } from './SignUp';

@@ -5,18 +5,18 @@ import './Login.css'; // Подключите свой CSS-файл или до�
 const Login = () => {
     return (
             <div className="login-container">
-                <h1>Login</h1>
+                <h1>Вход</h1>
                 <div className="input-group">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username">Имя пользователя</label>
                     <input type="text" id="username" />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Пароль</label>
                     <input type="password" id="password" />
                 </div>
-                <button>Login</button>
+                <button>Войти</button>
                 <p>
-                    Нет учетной записи? <Link to="/signup">зарегистрируйтесь</Link>
+                    Нет учетной записи? <Link to="/signup">Зарегистрируйтесь</Link>
                 </p>
             </div>
     );

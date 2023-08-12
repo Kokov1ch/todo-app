@@ -1,0 +1,46 @@
+/* App.css (или добавьте стили в другой CSS-файл или в тег <style> внутри вашего компонента) */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    #background: rgb(2, 0, 36) linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+.app-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 20px;
+}
+
+.signup-container {
+    text-align: center;
+    border: 1px solid #000000;
+    padding: 20px;
+    margin-top: 150px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+button {
+    width: 100%;
+}
