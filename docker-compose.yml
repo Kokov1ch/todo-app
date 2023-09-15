@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: todo
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/mysql:rw
+    command: --default-authentication-plugin=mysql_native_password
+  nginx:
+    build:
+      context: server/docker/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./server/public:/app/public
+    ports:
+      - "8080:80"
+  php:
+    build:
+      context: server/docker/php
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - ./server:/app
+volumes:
+  db-data: {}
