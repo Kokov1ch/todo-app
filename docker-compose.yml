@@ -21,9 +21,9 @@ services:
       - ./server/public:/app/public
     ports:
       - "8080:80"
-  php:
+  php-fpm:
     build:
-      context: server/docker/php
+      context: server/docker/php-fpm
       dockerfile: Dockerfile
     working_dir: /app
     volumes:
