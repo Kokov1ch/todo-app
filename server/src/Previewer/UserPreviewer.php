@@ -12,14 +12,6 @@ class UserPreviewer
         "login" => "string",
         "fio" => "string",
         "email" => "string",
-        "tasks" => [
-            "id" => "int",
-            "name" => "string",
-            "description" => "string|null",
-            "startDate" => "string|null",
-            "endDate" => "string|null",
-            "done" => "bool|null",
-        ]
     ])]
     public function preview(User $user): array
     {
