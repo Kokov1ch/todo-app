@@ -104,12 +104,12 @@ class Task
         return $this;
     }
 
-    public function getUserId(): ?user
+    public function getUser(): ?user
     {
         return $this->user;
     }
 
-    public function setUserId(?user $user): static
+    public function setUser(?user $user): static
     {
         $this->user = $user;
 
