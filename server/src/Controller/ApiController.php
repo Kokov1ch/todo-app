@@ -59,4 +59,5 @@ class ApiController extends AbstractController
             : fn(string $filter) => $em->getFilters()->disable($filter);
         $set("softdeleteable");
     }
+
 }

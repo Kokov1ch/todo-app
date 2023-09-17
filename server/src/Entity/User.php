@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Gedmo\SoftDeleteable(fieldName:"deletedAt", timeAware:false, hardDelete:false)]
 class User
@@ -30,7 +32,7 @@ class User
     #[ORM\OneToMany(mappedBy: 'userId', targetEntity: Task::class, orphanRemoval: true)]
     private Collection $tasks;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTimeInterface $deletedAt = null;
 
     public function __construct()
