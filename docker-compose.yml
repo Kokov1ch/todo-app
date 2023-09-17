@@ -10,7 +10,7 @@ services:
       MYSQL_USER: "user"
       MYSQL_PASSWORD: "password"
     volumes:
-      - db-data:/var/lib/mysql:rw
+      - mysql-data:/var/lib/mysql:rw
     ports:
       - "3307:3306"
   nginx:
@@ -29,4 +29,4 @@ services:
     volumes:
       - ./server:/app
 volumes:
-  db-data: {}
+  mysql-data: {}

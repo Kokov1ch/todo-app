@@ -52,8 +52,11 @@ class ApiController extends AbstractController
         return $this->respondWithErrors($message, Response::HTTP_NOT_FOUND);
     }
 
-    protected function setSoftDeletable(bool $enabled = true): void
+    protected function setSoftDeleteable(EntityManagerInterface $em, bool $enabled = true): void
     {
-
+        $set = $enabled
+            ? fn(string $filter) => $em->getFilters()->enable($filter)
+            : fn(string $filter) => $em->getFilters()->disable($filter);
+        $set("softdeleteable");
     }
 }

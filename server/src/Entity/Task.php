@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\TaskRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
+#[Gedmo\SoftDeleteable(fieldName:"deletedAt", timeAware:false, hardDelete:false)]
 class Task
 {
     #[ORM\Id]
@@ -32,6 +34,9 @@ class Task
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $userId = null;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?\DateTimeInterface $deletedAt = null;
 
     public function getId(): ?int
     {
@@ -82,6 +87,7 @@ class Task
     public function setEndDate(?\DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
+        
 
         return $this;
     }
@@ -106,6 +112,18 @@ class Task
     public function setUserId(?user $userId): static
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(\DateTimeInterface $deletedAt): static
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
