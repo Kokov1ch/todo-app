@@ -33,7 +33,7 @@ class Task
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $userId = null;
+    private ?user $user = null;
 
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTimeInterface $deletedAt = null;
@@ -106,12 +106,12 @@ class Task
 
     public function getUserId(): ?user
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(?user $userId): static
+    public function setUserId(?user $user): static
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
