@@ -4,6 +4,13 @@ controllers:
     prefix: '/api'
     trailing_slash_on_root: false
 
+api_login_check:
+    path: /api/login_check
+    controller: App\Controller\RegistrationController::getTokenUser
+
+gesdinet_jwt_refresh_token:
+    path: /api/token/refresh
+
 app.swagger_ui:
     path: /api/doc
     methods: GET
