@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ApiController extends AbstractController
+abstract class ApiController extends AbstractController
 {
     public function response($data, $statusCode = Response::HTTP_OK, $headers = []): JsonResponse
     {
