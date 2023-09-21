@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Gedmo\SoftDeleteable(fieldName:"deletedAt", timeAware:false, hardDelete:false)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,7 +22,7 @@ class User
     #[ORM\Column(length: 36)]
     private ?string $login = null;
 
-    #[ORM\Column(length: 36)]
+    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
     #[ORM\Column(length: 100)]
@@ -35,9 +37,25 @@ class User
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTimeInterface $deletedAt = null;
 
+    #[ORM\Column]
+    private array $roles = [];
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+    }
+    public function getUserIdentifier(): string
+    {
+//        return $this->login;
+        return (string) $this->id;
+    }
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('login', new NotBlank());
+        $metadata->addPropertyConstraint('password', new NotBlank());
+        $metadata->addPropertyConstraint('email', new Assert\Regex([
+            'pattern' => '/(.+@.+\..+)/',
+        ]));
     }
 
     public function getId(): ?int
@@ -93,6 +111,17 @@ class User
         return $this;
     }
 
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
     /**
      * @return Collection<int, Task>
      */
@@ -133,5 +162,30 @@ class User
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function addRole(string $role)
+    {
+        $this->roles = array_unique([...$this->roles, $role]);
     }
 }
