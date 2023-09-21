@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class TaskFixtures extends BaseFixture implements DependentFixtureInterface

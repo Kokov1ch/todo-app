@@ -57,8 +57,4 @@ class UserFixtures extends BaseFixture
         return [self::DEV_GROUP];
     }
 
-//    public function getOrder(): int
-//    {
-//       return 1;
-//    }
 }
