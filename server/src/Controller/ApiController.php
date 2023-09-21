@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +29,7 @@ abstract class ApiController extends AbstractController
             ],
             $statusCode,
             $headers
-        );
+        )->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
 
     public function respondWithSuccess($success, $statusCode = Response::HTTP_OK, $headers = []): JsonResponse
@@ -39,7 +41,7 @@ abstract class ApiController extends AbstractController
             ],
             $statusCode,
             $headers
-        );
+        )->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
 
     public function respondValidationError($message = 'Data no valid'): JsonResponse
@@ -50,6 +52,12 @@ abstract class ApiController extends AbstractController
     public function respondNotFound($message = 'Not found!'): JsonResponse
     {
         return $this->respondWithErrors($message, Response::HTTP_NOT_FOUND);
+    }
+
+    protected function getUserEntity(UserRepository $userRepository): User
+    {
+        return $userRepository
+            ->findOneBy(['id' => (int)parent::getUser()->getUserIdentifier()]);
     }
 
     protected function setSoftDeleteable(EntityManagerInterface $em, bool $enabled = true): void
