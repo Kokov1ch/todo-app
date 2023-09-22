@@ -45,8 +45,7 @@ class UserController extends ApiController
                              UserPasswordHasherInterface $passwordEncoder,
                              ValidatorInterface          $validator): JsonResponse
     {
-        $request = json_decode($request->getContent(), true);
-        $user = $this->userRepository->findOneBy(['login' => $request['login']]);
+        $request = $request->toArray();
         try {
             $this->setSoftDeleteable($this->em, false);
             $user = $this->userRepository->findOneBy(['login' => $request['login']]);

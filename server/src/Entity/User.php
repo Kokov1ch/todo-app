@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $tasks;
 
     #[ORM\Column(type: "datetime", nullable: true)]
-    private ?DateTimeInterface $deletedAt;
+    private ?DateTimeInterface $deletedAt = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -160,7 +161,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTimeInterface $deletedAt): static
+    public function setDeletedAt(?DateTimeInterface $deletedAt): static
     {
         $this->deletedAt = $deletedAt;
 
