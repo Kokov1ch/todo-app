@@ -92,4 +92,21 @@ class UserController extends ApiController
             return $this->respondValidationError();
         }
     }
+
+    #[Route('/{userId}', name: 'delete_by_id', requirements: ['userId' => '\d+'], methods: ['DELETE'])]
+    public function deleteUser(int $userId): JsonResponse
+    {
+        // TODO: Сделать каскадное удаление тасков
+
+        $user = $this->userRepository->find($userId);
+        if (!$user) {
+            return $this->respondNotFound("User not found");
+        }
+
+        $this->em->remove($user);
+        $this->em->flush();
+
+        return $this->respondWithSuccess("User deleted successfully");
+    }
+
 }

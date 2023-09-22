@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Task;
 use DateTimeInterface;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,7 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id;
 
     #[ORM\Column(length: 36)]
     private ?string $login;
@@ -33,16 +34,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $fio;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Assert\Email(message: "The email is not a valid email.")]
     private ?string $email;
 
-    #[ORM\OneToMany(mappedBy: 'userId', targetEntity: Task::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'userId', targetEntity: Task::class)]
+    #[ORM\JoinColumn(onDelete: 'cascade')]
     private Collection $tasks;
 
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?DateTimeInterface $deletedAt ;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, type: 'json')]
     private array $roles = [];
 
     public function __construct()
