@@ -24,24 +24,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 36)]
-    private ?string $login = null;
+    private ?string $login;
 
     #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    private ?string $password;
 
-    #[ORM\Column(length: 100)]
-    private ?string $fio = null;
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $fio;
 
-    #[ORM\Column(length: 100)]
-    private ?string $email = null;
+    #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\Email(message: "The email is not a valid email.")]
+    private ?string $email;
 
     #[ORM\OneToMany(mappedBy: 'userId', targetEntity: Task::class, orphanRemoval: true)]
     private Collection $tasks;
 
     #[ORM\Column(type: "datetime", nullable: true)]
-    private ?DateTimeInterface $deletedAt = null;
+    private ?DateTimeInterface $deletedAt ;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private array $roles = [];
 
     public function __construct()
@@ -57,9 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $metadata->addPropertyConstraint('login', new NotBlank());
         $metadata->addPropertyConstraint('password', new NotBlank());
-        $metadata->addPropertyConstraint('email', new Assert\Regex([
-            'pattern' => '/(.+@.+\..+)/',
-        ]));
+        $metadata->addPropertyConstraint('email', new Assert\Email());
     }
 
     public function getId(): ?int

@@ -74,21 +74,20 @@ class UserController extends ApiController
             if (isset($request['email'])) {
                 $user->setEmail($request['email']);
             }
+            if (count($validator->validate($user)) == 0) {
+                $user->setPassword(
+                    $passwordEncoder->hashPassword(
+                        $user,
+                        $request['password']
+                    )
+                );
 
+                $this->em->persist($user);
+                $this->em->flush();
 
-            $validator->validate($user);
-
-            $user->setPassword(
-                $passwordEncoder->hashPassword(
-                    $user,
-                    $request['password']
-                )
-            );
-
-            $this->em->persist($user);
-            $this->em->flush();
-
-            return $this->respondWithSuccess("User added successfully");
+                return $this->respondWithSuccess("User added successfully");
+            }
+            return $this->respondValidationError();
         } catch (Exception) {
             return $this->respondValidationError();
         }
