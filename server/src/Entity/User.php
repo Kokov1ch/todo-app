@@ -9,8 +9,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use OpenApi\Attributes as OA;
+use phpDocumentor\Reflection\Type;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -22,18 +25,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[OA\Property()]
+    #[Groups("default")]
     private ?int $id;
 
     #[ORM\Column(length: 36)]
     private ?string $login;
 
     #[ORM\Column(length: 255)]
+    #[OA\Property(format:"password")]
+    #[Groups("default")]
     private ?string $password;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[OA\Property()]
+    #[Groups("default")]
     private ?string $fio;
 
+
     #[ORM\Column(length: 100, nullable: true)]
+    #[OA\Property(format:"email")]
+    #[Groups("default")]
     private ?string $email;
 
     #[ORM\OneToMany(mappedBy: 'userId', targetEntity: Task::class)]
@@ -41,9 +53,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $tasks;
 
     #[ORM\Column(type: "datetime", nullable: true)]
-    private ?DateTimeInterface $deletedAt ;
+    private ?DateTimeInterface $deletedAt;
 
     #[ORM\Column(nullable: true, type: 'json')]
+    #[OA\Property(type: "array",
+                  items: new OA\Items(
+                      type:"string",
+                      minItems:1,
+                      maxItems: 2,
+                      enum: ["ROLE_USER", "ROLE_ADMIN"]))]
+    #[Groups("default")]
     private array $roles = [];
 
     public function __construct()
@@ -67,6 +86,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+
+    #[OA\Property(property:"login")]
+    #[Groups("default")]
     public function getLogin(): ?string
     {
         return $this->login;

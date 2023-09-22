@@ -15,26 +15,26 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id;
 
     #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    private ?string $name;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $description = null;
+    private ?string $description;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
+    private ?\DateTimeInterface $startDate;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endDate = null;
+    private ?\DateTimeInterface $endDate;
 
     #[ORM\Column]
-    private ?bool $done = null;
+    private ?bool $done;
 
     #[ORM\ManyToOne(inversedBy: 'tasks', targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private ?User $user;
 
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?DateTimeInterface $deletedAt;

@@ -7,12 +7,17 @@ use App\Previewer\UserPreviewer;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use OpenApi\Attributes as OA;
 
+
+#[OA\Tag(name:"User")]
+#[Security(name:"Bearer")]
 #[Route('/users', name: 'users_')]
 class UserController extends ApiController
 {
@@ -26,6 +31,22 @@ class UserController extends ApiController
         $this->userRepository = $userRepository;
     }
 
+    /**
+     *  Get all users
+     */
+    #[OA\Response(
+        response: 200,
+        description: "HTTP_OK",
+        content: new OA\JsonContent(
+        type: "array",
+        items: new OA\Items(ref: "#/components/schemas/UserView")
+        )
+    )
+    ]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
     #[Route(name: 'get', methods: ['GET'])]
     public function getUsers(UserPreviewer $userPreviewer): JsonResponse
     {
@@ -40,6 +61,33 @@ class UserController extends ApiController
         return $this->response($userPreviews);
     }
 
+    /**
+     *  Add a new user
+     */
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            properties:[
+                new OA\Property(property: "login", ref:"#/components/schemas/UserView/properties/login"),
+                new OA\Property(property: "password", ref:"#/components/schemas/User/properties/password"),
+                new OA\Property(property: "fio",  ref:"#/components/schemas/UserView/properties/fio", nullable:true),
+                new OA\Property(property: "email", ref:"#/components/schemas/UserView/properties/email", nullable:true),
+                new OA\Property(property:"roles", ref:"#/components/schemas/UserView/properties/roles", nullable:true)
+                ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "User added successfully"
+    )]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
+    #[OA\Response(
+        response: 422,
+        description: "Unprocessable Content"
+    )]
     #[Route(name: 'post', methods: ['POST'])]
     public function postUser(Request                     $request,
                              UserPasswordHasherInterface $passwordEncoder,
@@ -93,6 +141,29 @@ class UserController extends ApiController
         }
     }
 
+    /**
+     *  Delete multiple users
+     */
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            properties:[
+                new OA\Property(property: "user_ids",  type: "array", items: new OA\Items(ref: "#/components/schemas/User/properties/id"))
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "Users deleted successfully"
+    )]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
+    #[OA\Response(
+        response: 404,
+        description: "User is not found"
+    )]
     #[Route(name: 'delete', methods: ['DELETE'])]
     public function deleteUsers(Request $request): JsonResponse
     {
@@ -121,6 +192,22 @@ class UserController extends ApiController
         }
     }
 
+    /**
+     *  Get user by id
+     */
+    #[OA\Response(
+        response: 200,
+        description: "HTTP_OK",
+        content: new OA\JsonContent(ref: "#/components/schemas/UserView")
+    )]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
+    #[OA\Response(
+        response: 404,
+        description: "User is not found"
+    )]
     #[Route('/{userId}', name: 'get_by_id', requirements: ['userId' => '\d+'], methods: ['GET'])]
     public function getUserById(UserPreviewer $userPreviewer, int $userId): JsonResponse
     {
@@ -134,6 +221,38 @@ class UserController extends ApiController
         return $this->response($userPreviewer->preview($user));
     }
 
+    /**
+     *  Change user data
+     */
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            properties:[
+                new OA\Property(property: "login", ref:"#/components/schemas/UserView/properties/login"),
+                new OA\Property(property: "password", ref:"#/components/schemas/User/properties/password"),
+                new OA\Property(property: "fio",  ref:"#/components/schemas/UserView/properties/fio", nullable:true),
+                new OA\Property(property: "email", ref:"#/components/schemas/UserView/properties/email", nullable:true),
+                new OA\Property(property:"roles", ref:"#/components/schemas/UserView/properties/roles", nullable:true)
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "User added successfully"
+    )]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
+    #[OA\Response(
+        response: 404,
+        description: "User if not found"
+    )]
+    #[OA\Response(
+        response: 422,
+        description: "Unprocessable Content"
+    )]
+    #[Route(name: 'post', methods: ['POST'])]
     #[Route('/{userId}', name: 'put_by_id', requirements: ['userId' => '\d+'], methods: ['PUT'])]
     public function updateUser(Request                     $request,
                                UserPasswordHasherInterface $passwordEncoder,
@@ -190,6 +309,21 @@ class UserController extends ApiController
         }
     }
 
+    /**
+     *  Delete user by id
+     */
+    #[OA\Response(
+        response: 200,
+        description: "User deleted successfully"
+    )]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
+    #[OA\Response(
+        response: 404,
+        description: "User is not found"
+    )]
     #[Route('/{userId}', name: 'delete_by_id', requirements: ['userId' => '\d+'], methods: ['DELETE'])]
     public function deleteUser(int $userId): JsonResponse
     {
