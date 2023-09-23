@@ -71,8 +71,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     public function getUserIdentifier(): string
     {
-//        return $this->login;
-        return (string) $this->id;
+        return $this->login;
+//        return (string) $this->id;
     }
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {

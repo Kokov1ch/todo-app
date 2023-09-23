@@ -15,6 +15,7 @@ nelmio_api_doc:
         servers:
             - url: /
         tags:
+            - name: Login Check
             - name: User
             - name: Task
         info:
@@ -26,13 +27,37 @@ nelmio_api_doc:
             description: GitHub
             url: https://github.com/Kokov1ch/todo-app
 
+        paths:
+            /api/login_check:
+                post:
+                    security: [ ]
+                    tags:
+                        - Login Check
+                    summary: Get a JWT and refresh token using login and password
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        username:
+                                            example: "admin"
+                                            type: string
+                                        password:
+                                            example: "admin"
+                                            type: string
+
         components:
             securitySchemes:
                 Bearer:
                     type: http
                     scheme: bearer
                     bearerFormat: JWT
-                    description: >
+                    description: |
+                        #### Может быть получен при помощи команды:
+                        ## `php bin/console lexik:jwt:generate-token -c App\\Entity\\User -t <seconds> <login>`
+                        #### Пример команды:
+                        ## `php bin/console lexik:jwt:generate-token -c App\\Entity\\User -t 86400 admin`
         security:
             - Bearer: [ ]
     areas: # to filter documented areas

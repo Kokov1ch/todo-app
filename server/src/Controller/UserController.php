@@ -339,4 +339,124 @@ class UserController extends ApiController
         return $this->respondWithSuccess("User deleted successfully");
     }
 
+    /**
+     *  Get information about the current user
+     */
+    #[OA\Response(
+        response: 200,
+        description: "HTTP_OK",
+        content: new OA\JsonContent(ref: "#/components/schemas/UserView")
+    )]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
+    #[OA\Response(
+        response: 422,
+        description: "Unprocessable Content"
+    )]
+    #[Route('/self', name: 'get', methods: ['GET']
+    )]
+    public function getSelf(UserPreviewer $userPreviewer): JsonResponse
+    {
+        $this->setSoftDeleteable($this->em, false);
+        try {
+            return $this->response($userPreviewer->preview($this->getUserEntity($this->userRepository)));
+        } catch (Exception $e) {
+            return $this->respondValidationError($e->getMessage());
+        }
+    }
+
+    /**
+     *  Change current user data
+     */
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            properties:[
+                new OA\Property(property: "login", ref:"#/components/schemas/UserView/properties/login"),
+                new OA\Property(property: "old_password", ref:"#/components/schemas/User/properties/password"),
+                new OA\Property(property: "new_password", ref:"#/components/schemas/User/properties/password"),
+                new OA\Property(property: "fio",  ref:"#/components/schemas/UserView/properties/fio", nullable:true),
+                new OA\Property(property: "email", ref:"#/components/schemas/UserView/properties/email", nullable:true),
+            ],
+            example: [
+                "login" => "fedorFet",
+                "old_password" => "fedor",
+                "new_password" => "fet",
+                "fio" => "Фет Фёдор Германович",
+                "email" => "fedorfet@gmail.com"
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: "User added successfully"
+    )]
+    #[OA\Response(
+        response: 403,
+        description: "Permission denied"
+    )]
+    #[OA\Response(
+        response: 404,
+        description: "User if not found"
+    )]
+    #[OA\Response(
+        response: 422,
+        description: "Unprocessable Content"
+    )]
+    #[Route('/self', name: 'put', methods: ['PUT'])]
+    public function updateSelf(Request $request, UserPasswordHasherInterface $passwordEncoder): JsonResponse
+    {
+        $user = $this->getUserEntity($this->userRepository);
+        $request = $request->toArray();
+        try {
+            if (isset($request['login'])) {
+                $userRepository = $this->em->getRepository(User::class);
+                $userExist = (bool)$userRepository->findOneBy(['login' => $request['login']]);
+
+                if ($userExist && $user->getUserIdentifier() != $request['login']) {
+                    return $this->respondValidationError('User with this login is already exist');
+                }
+
+                $user->setLogin($request['login']);
+            }
+
+            if (isset($request['fio'])) {
+                $user->setFio($request['fio']);
+            }
+
+            if (isset($request['email'])) {
+                $email = $request['email'];
+
+                if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
+                    return $this->respondValidationError("Invalid email data");
+                }
+
+                $user->setEmail($email);
+            }
+
+            if (!isset($request['old_password']))
+                return $this->respondValidationError("Old password missing");
+
+            if (!isset($request['new_password'])) {
+                return $this->respondValidationError("New password missing");
+            }
+
+            $oldPassword = $request['old_password'];
+            $newPassword = $request['new_password'];
+
+            if (!$passwordEncoder->isPasswordValid($user, $oldPassword)) {
+                return $this->respondValidationError("Incorrect old password");
+            } else {
+                $user->setPassword($passwordEncoder->hashPassword($user, $newPassword));
+            }
+
+            $this->em->flush();
+
+            return $this->respondWithSuccess("Data updated successfully");
+        } catch (Exception) {
+            return $this->respondValidationError();
+        }
+    }
 }
