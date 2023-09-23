@@ -459,4 +459,5 @@ class UserController extends ApiController
             return $this->respondValidationError();
         }
     }
+
 }
