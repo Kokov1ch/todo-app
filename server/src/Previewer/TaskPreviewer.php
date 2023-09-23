@@ -44,4 +44,20 @@ class TaskPreviewer
         ]
         );
     }
+
+    public function previewWithUserId(Task $task): array
+    {
+        $user = $task->getUser();
+
+        return array_merge([
+            "id" => $task->getId(),
+            "name" => $task->getName(),
+            "description" => $task->getDescription(),
+            "user_id" => $user->getId(),
+            "start_date" => $task->getStartDate(),
+            "end_date" => $task->getEndDate(),
+            "done" => $task->isDone(),
+        ]
+        );
+    }
 }
