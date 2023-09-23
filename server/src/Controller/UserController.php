@@ -213,7 +213,7 @@ class UserController extends ApiController
     {
         $user = $this->userRepository->find($userId);
         if (!$user) {
-            return $this->respondNotFound("User not found");
+            return $this->respondNotFound("User is not found");
         }
 
         $this->setSoftDeleteable($this->em, false);
@@ -252,7 +252,6 @@ class UserController extends ApiController
         response: 422,
         description: "Unprocessable Content"
     )]
-    #[Route(name: 'post', methods: ['POST'])]
     #[Route('/{userId}', name: 'put_by_id', requirements: ['userId' => '\d+'], methods: ['PUT'])]
     public function updateUser(Request                     $request,
                                UserPasswordHasherInterface $passwordEncoder,
@@ -261,7 +260,7 @@ class UserController extends ApiController
     {
         $user = $this->userRepository->find($userId);
         if (!$user) {
-            return $this->respondNotFound("User not found");
+            return $this->respondNotFound("User is not found");
         }
 
         $request = $request->toArray();
@@ -331,7 +330,7 @@ class UserController extends ApiController
 
         $user = $this->userRepository->find($userId);
         if (!$user) {
-            return $this->respondNotFound("User not found");
+            return $this->respondNotFound("User is not found");
         }
 
         $this->em->remove($user);
