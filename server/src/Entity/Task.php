@@ -7,6 +7,8 @@ use App\Repository\TaskRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use OpenApi\Attributes as OA;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[Gedmo\SoftDeleteable(fieldName:"deletedAt", timeAware:false, hardDelete:false)]
@@ -15,23 +17,37 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[OA\Property()]
+    #[Groups("default")]
     private ?int $id;
 
+    #[OA\Property()]
+    #[Groups("default")]
     #[ORM\Column(length: 100)]
     private ?string $name;
 
+    #[OA\Property()]
+    #[Groups("default")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $startDate;
+    #[OA\Property(format: "date-time")]
+    #[Groups("default")]
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?DateTimeInterface $startDate;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endDate;
+    #[OA\Property(format: "date-time")]
+    #[Groups("default")]
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?DateTimeInterface $endDate;
 
+    #[OA\Property()]
+    #[Groups("default")]
     #[ORM\Column]
     private ?bool $done;
 
+    #[OAT\Property(ref: "#/components/schemas/user")]
+    #[Groups("default")]
     #[ORM\ManyToOne(inversedBy: 'tasks', targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user;
@@ -68,24 +84,24 @@ class Task
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): ?DateTimeInterface
     {
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): static
+    public function setStartDate(?DateTimeInterface $startDate): static
     {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): ?DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): static
+    public function setEndDate(?DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
         
