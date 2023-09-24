@@ -8,6 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 class UserView
 {
+
     #[OA\Property(property: "id", ref : "#/components/schemas/User/properties/id")]
     #[Groups("default", "id")]
     public int $id;
@@ -30,4 +31,5 @@ class UserView
     #[OA\Property(property: "roles", ref : "#/components/schemas/User/properties/roles")]
     #[Groups("default", "roles")]
     public array $roles;
+
 }

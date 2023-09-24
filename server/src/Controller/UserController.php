@@ -167,8 +167,6 @@ class UserController extends ApiController
     #[Route(name: 'delete', methods: ['DELETE'])]
     public function deleteUsers(Request $request): JsonResponse
     {
-        // TODO: Сделать каскадное удаление тасков
-
         $request = $request->toArray();
 
         try {
@@ -326,8 +324,6 @@ class UserController extends ApiController
     #[Route('/{userId}', name: 'delete_by_id', requirements: ['userId' => '\d+'], methods: ['DELETE'])]
     public function deleteUser(int $userId): JsonResponse
     {
-        // TODO: Сделать каскадное удаление тасков
-
         $user = $this->userRepository->find($userId);
         if (!$user) {
             return $this->respondNotFound("User is not found");
@@ -355,7 +351,7 @@ class UserController extends ApiController
         response: 422,
         description: "Unprocessable Content"
     )]
-    #[Route('/self', name: 'get', methods: ['GET']
+    #[Route('/self', name: 'get_info', methods: ['GET']
     )]
     public function getSelf(UserPreviewer $userPreviewer): JsonResponse
     {

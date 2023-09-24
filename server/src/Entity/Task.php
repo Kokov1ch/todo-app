@@ -49,7 +49,7 @@ class Task
     #[OAT\Property(ref: "#/components/schemas/user")]
     #[Groups("default")]
     #[ORM\ManyToOne(inversedBy: 'tasks', targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user;
 
     #[ORM\Column(type: "datetime", nullable: true)]

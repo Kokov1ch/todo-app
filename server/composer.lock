@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16a2574049a8ee679eff23f940c6a0c0",
+    "content-hash": "283cec4475dee16e536325bc15279ef4",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2786,6 +2786,81 @@
             "time": "2021-07-14T16:46:02+00:00"
         },
         {
+            "name": "stof/doctrine-extensions-bundle",
+            "version": "v1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
+                "reference": "b40623da645d0e206331f506fb1065d8b0a0f3d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/b40623da645d0e206331f506fb1065d8b0a0f3d6",
+                "reference": "b40623da645d0e206331f506fb1065d8b0a0f3d6",
+                "shasum": ""
+            },
+            "require": {
+                "gedmo/doctrine-extensions": "^3.5.0",
+                "php": "^7.2.5 || ^8.0",
+                "symfony/cache": "^5.4 || ^6.0",
+                "symfony/config": "^5.4 || ^6.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0",
+                "symfony/event-dispatcher": "^5.4 || ^6.0",
+                "symfony/http-kernel": "^5.4 || ^6.0"
+            },
+            "require-dev": {
+                "symfony/mime": "^5.4 || ^6.0",
+                "symfony/phpunit-bridge": "^v5.4 || ^6.0",
+                "symfony/security-core": "^5.4 || ^6.0"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "to use the ORM extensions",
+                "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions",
+                "symfony/mime": "To use the Mime component integration for Uploadable"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stof\\DoctrineExtensionsBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                }
+            ],
+            "description": "Integration of the gedmo/doctrine-extensions with Symfony",
+            "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
+            "keywords": [
+                "behaviors",
+                "doctrine2",
+                "extensions",
+                "gedmo",
+                "loggable",
+                "nestedset",
+                "sluggable",
+                "sortable",
+                "timestampable",
+                "translatable",
+                "tree"
+            ],
+            "support": {
+                "issues": "https://github.com/stof/StofDoctrineExtensionsBundle/issues",
+                "source": "https://github.com/stof/StofDoctrineExtensionsBundle/tree/v1.8.0"
+            },
+            "time": "2023-07-07T15:34:33+00:00"
+        },
+        {
             "name": "symfony/asset",
             "version": "v6.3.0",
             "source": {
@@ -4641,6 +4716,54 @@
                 }
             ],
             "time": "2023-05-12T14:21:09+00:00"
+        },
+        {
+            "name": "symfony/orm-pack",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/orm-pack.git",
+                "reference": "554688738193b2f3b13d4b2b02ca9fdf3c6713b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/554688738193b2f3b13d4b2b02ca9fdf3c6713b4",
+                "reference": "554688738193b2f3b13d4b2b02ca9fdf3c6713b4",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/doctrine-migrations-bundle": "*",
+                "doctrine/orm": "*"
+            },
+            "conflict": {
+                "php": "<8.1"
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for the Doctrine ORM",
+            "support": {
+                "issues": "https://github.com/symfony/orm-pack/issues",
+                "source": "https://github.com/symfony/orm-pack/tree/v2.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-08-21T09:15:31+00:00"
         },
         {
             "name": "symfony/password-hasher",
@@ -6704,6 +6827,145 @@
             "time": "2023-07-31T07:08:24+00:00"
         },
         {
+            "name": "thecodingmachine/safe",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thecodingmachine/safe.git",
+                "reference": "3115ecd6b4391662b4931daac4eba6b07a2ac1f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thecodingmachine/safe/zipball/3115ecd6b4391662b4931daac4eba6b07a2ac1f0",
+                "reference": "3115ecd6b4391662b4931daac4eba6b07a2ac1f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.5",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.2",
+                "thecodingmachine/phpstan-strict-rules": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "deprecated/apc.php",
+                    "deprecated/array.php",
+                    "deprecated/datetime.php",
+                    "deprecated/libevent.php",
+                    "deprecated/misc.php",
+                    "deprecated/password.php",
+                    "deprecated/mssql.php",
+                    "deprecated/stats.php",
+                    "deprecated/strings.php",
+                    "lib/special_cases.php",
+                    "deprecated/mysqli.php",
+                    "generated/apache.php",
+                    "generated/apcu.php",
+                    "generated/array.php",
+                    "generated/bzip2.php",
+                    "generated/calendar.php",
+                    "generated/classobj.php",
+                    "generated/com.php",
+                    "generated/cubrid.php",
+                    "generated/curl.php",
+                    "generated/datetime.php",
+                    "generated/dir.php",
+                    "generated/eio.php",
+                    "generated/errorfunc.php",
+                    "generated/exec.php",
+                    "generated/fileinfo.php",
+                    "generated/filesystem.php",
+                    "generated/filter.php",
+                    "generated/fpm.php",
+                    "generated/ftp.php",
+                    "generated/funchand.php",
+                    "generated/gettext.php",
+                    "generated/gmp.php",
+                    "generated/gnupg.php",
+                    "generated/hash.php",
+                    "generated/ibase.php",
+                    "generated/ibmDb2.php",
+                    "generated/iconv.php",
+                    "generated/image.php",
+                    "generated/imap.php",
+                    "generated/info.php",
+                    "generated/inotify.php",
+                    "generated/json.php",
+                    "generated/ldap.php",
+                    "generated/libxml.php",
+                    "generated/lzf.php",
+                    "generated/mailparse.php",
+                    "generated/mbstring.php",
+                    "generated/misc.php",
+                    "generated/mysql.php",
+                    "generated/network.php",
+                    "generated/oci8.php",
+                    "generated/opcache.php",
+                    "generated/openssl.php",
+                    "generated/outcontrol.php",
+                    "generated/pcntl.php",
+                    "generated/pcre.php",
+                    "generated/pgsql.php",
+                    "generated/posix.php",
+                    "generated/ps.php",
+                    "generated/pspell.php",
+                    "generated/readline.php",
+                    "generated/rpminfo.php",
+                    "generated/rrd.php",
+                    "generated/sem.php",
+                    "generated/session.php",
+                    "generated/shmop.php",
+                    "generated/sockets.php",
+                    "generated/sodium.php",
+                    "generated/solr.php",
+                    "generated/spl.php",
+                    "generated/sqlsrv.php",
+                    "generated/ssdeep.php",
+                    "generated/ssh2.php",
+                    "generated/stream.php",
+                    "generated/strings.php",
+                    "generated/swoole.php",
+                    "generated/uodbc.php",
+                    "generated/uopz.php",
+                    "generated/url.php",
+                    "generated/var.php",
+                    "generated/xdiff.php",
+                    "generated/xml.php",
+                    "generated/xmlrpc.php",
+                    "generated/yaml.php",
+                    "generated/yaz.php",
+                    "generated/zip.php",
+                    "generated/zlib.php"
+                ],
+                "classmap": [
+                    "lib/DateTime.php",
+                    "lib/DateTimeImmutable.php",
+                    "lib/Exceptions/",
+                    "deprecated/Exceptions/",
+                    "generated/Exceptions/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP core functions that throw exceptions instead of returning FALSE on error",
+            "support": {
+                "issues": "https://github.com/thecodingmachine/safe/issues",
+                "source": "https://github.com/thecodingmachine/safe/tree/v2.5.0"
+            },
+            "time": "2023-04-05T11:54:14+00:00"
+        },
+        {
             "name": "twig/twig",
             "version": "v3.7.1",
             "source": {
@@ -6831,6 +7093,173 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wernerdweight/doctrine-cascade-soft-delete-bundle",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wernerdweight/DoctrineCascadeSoftDeleteBundle.git",
+                "reference": "7d71768a646d96e8910da41bd6c4fc68b233fb99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wernerdweight/DoctrineCascadeSoftDeleteBundle/zipball/7d71768a646d96e8910da41bd6c4fc68b233fb99",
+                "reference": "7d71768a646d96e8910da41bd6c4fc68b233fb99",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "stof/doctrine-extensions-bundle": "^1.3",
+                "symfony/framework-bundle": "^4.0|^5.0|^6.0",
+                "symfony/orm-pack": "^1.0|^2.0",
+                "thecodingmachine/safe": "^2.4",
+                "wernerdweight/enhanced-exception": "^2.0",
+                "wernerdweight/ra": "^2.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^4.3|^5.0|^6.0",
+                "thecodingmachine/phpstan-safe-rule": "^1.2",
+                "wernerdweight/cs": "^3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "allow-contrib": false,
+                    "require": "^4.3|^5.0|^6.0"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "WernerDweight\\DoctrineCascadeSoftDeleteBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Werner Dweight Solutions",
+                    "email": "info@wds.blue"
+                }
+            ],
+            "description": "A Symfony bundle that enables your application to cascade on delete even if you're using soft-delete.",
+            "homepage": "https://github.com/wernerdweight/DoctrineCascadeSoftDeleteBundle",
+            "keywords": [
+                "bundle",
+                "cascade",
+                "doctrine",
+                "soft-delete"
+            ],
+            "support": {
+                "issues": "https://github.com/wernerdweight/DoctrineCascadeSoftDeleteBundle/issues",
+                "source": "https://github.com/wernerdweight/DoctrineCascadeSoftDeleteBundle/tree/2.0.0"
+            },
+            "time": "2023-02-21T17:43:23+00:00"
+        },
+        {
+            "name": "wernerdweight/enhanced-exception",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wernerdweight/EnhancedException.git",
+                "reference": "ddb512bedc9e15d77922863498af08ce4ff3939f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wernerdweight/EnhancedException/zipball/ddb512bedc9e15d77922863498af08ce4ff3939f",
+                "reference": "ddb512bedc9e15d77922863498af08ce4ff3939f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "thecodingmachine/safe": "^2.4"
+            },
+            "require-dev": {
+                "thecodingmachine/phpstan-safe-rule": "^1.2",
+                "wernerdweight/cs": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WernerDweight\\EnhancedException\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Werner Dweight Solutions",
+                    "email": "info@wds.blue"
+                }
+            ],
+            "description": "Generic enhanced exception to be used in other projects",
+            "homepage": "https://github.com/wernerdweight/EnhancedException",
+            "keywords": [
+                "Enhanced",
+                "exception",
+                "generic"
+            ],
+            "support": {
+                "issues": "https://github.com/wernerdweight/EnhancedException/issues",
+                "source": "https://github.com/wernerdweight/EnhancedException/tree/2.0.0"
+            },
+            "time": "2023-02-21T17:23:22+00:00"
+        },
+        {
+            "name": "wernerdweight/ra",
+            "version": "2.0.2",
+            "target-dir": "WernerDweight/RA",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wernerdweight/RA.git",
+                "reference": "4cb8739b018a44b9398a1131f1197bb2db08d8ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wernerdweight/RA/zipball/4cb8739b018a44b9398a1131f1197bb2db08d8ae",
+                "reference": "4cb8739b018a44b9398a1131f1197bb2db08d8ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "thecodingmachine/safe": "^2.4"
+            },
+            "require-dev": {
+                "thecodingmachine/phpstan-safe-rule": "^1.2",
+                "wernerdweight/cs": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "WernerDweight\\RA\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Werner Dweight Solutions",
+                    "email": "info@wds.blue"
+                }
+            ],
+            "description": "PHP Array object with consistent and predictable API",
+            "homepage": "https://github.com/wernerdweight/RA",
+            "keywords": [
+                "array",
+                "iterable",
+                "object"
+            ],
+            "support": {
+                "issues": "https://github.com/wernerdweight/RA/issues",
+                "source": "https://github.com/wernerdweight/RA/tree/2.0.2"
+            },
+            "time": "2023-02-21T16:07:26+00:00"
         },
         {
             "name": "zircote/swagger-php",

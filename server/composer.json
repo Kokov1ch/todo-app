@@ -33,6 +33,7 @@
         "symfony/twig-bundle": "6.3.*",
         "symfony/validator": "6.3.*",
         "symfony/yaml": "6.3.*",
+        "wernerdweight/doctrine-cascade-soft-delete-bundle": "^2.0",
         "zircote/swagger-php": "^4.7"
     },
     "config": {
