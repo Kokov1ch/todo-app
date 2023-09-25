@@ -1,6 +1,6 @@
 # TODO APP (In progress)
 
-Для разработки server используется Docker version 24.0.2
+Для разработки server используется Docker version 24.0.6
 
 # Client (In progress)
 
@@ -23,15 +23,19 @@ docker compose up -d --force-recreate
 docker compose exec php-fpm bash
 ```
 #### Все последующие команды выполняются внутри контейнера php-fpm
-#### 5. Создание бд
+#### 5. Создание public и private keys для JWT
+```bash
+bin/console lexik:jwt:generate-keypair
+```
+#### 6. Создание бд
 ```bash
 bin/console doctrine:database:create
 ```
-#### 6. Установка миграций
+#### 7. Установка миграций
 ```bash
 bin/console doctrine:migrations:migrate
 ```
-#### 7. Установка фикстур
+#### 8. Установка фикстур
 ```bash
 bin/console doctrine:fixtures:load
 ```
