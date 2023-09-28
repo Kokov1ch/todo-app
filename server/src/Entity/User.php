@@ -55,13 +55,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?DateTimeInterface $deletedAt;
 
-    #[ORM\Column(nullable: true, type: 'json')]
+    #[ORM\Column(type: 'json', nullable: true)]
     #[OA\Property(type: "array",
                   items: new OA\Items(
-                      type:"string",
-                      minItems:1,
-                      maxItems: 2,
-                      enum: ["ROLE_USER", "ROLE_ADMIN"]))]
+                      type: "string",
+            maxItems: 2,
+            minItems: 1,
+            enum: ["ROLE_USER", "ROLE_ADMIN"]))]
     #[Groups("default")]
     private array $roles = [];
 
@@ -74,7 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->login;
 //        return (string) $this->id;
     }
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    public static function loadValidatorMetadata(ClassMetadata $metadata): void
     {
         $metadata->addPropertyConstraint('login', new NotBlank());
         $metadata->addPropertyConstraint('password', new NotBlank());

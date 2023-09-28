@@ -11,12 +11,6 @@ security:
             entity:
                 class: App\Entity\User
                 property: login
-        # Костыль для того, чтобы refresh работал.
-        # Сломалось после изменения содержимого jwt с логина на id
-        app_user_id_provider:
-            entity:
-                class: App\Entity\User
-                property: id
         jwt:
             lexik_jwt: ~
 
@@ -31,7 +25,7 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         refresh:
-            provider: app_user_id_provider
+            provider: app_user_provider
             pattern: ^/api/token/refresh
             stateless: true
             refresh_jwt: ~
@@ -52,5 +46,4 @@ security:
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
     role_hierarchy:
-        ROLE_TEACHER:  ROLE_USER
         ROLE_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
