@@ -1,5 +1,28 @@
 version: "3.8"
 services:
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    environment:
+      FRONTEND_URI: '_'
+    volumes:
+      - ./deployments/default.conf:/etc/nginx/conf.d/default.conf:delegated
+    command: [ nginx-debug, '-g', 'daemon off;' ]
+
+  frontend:
+    build:
+      context: client/docker/
+      dockerfile: Dockerfile
+    restart: on-failure
+    volumes:
+      - ./client:/app:delegated
+    command: npm start
+
   mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -14,12 +37,13 @@ services:
     ports:
       - "3307:3306"
 
-  nginx:
-    depends_on:
-      - php-fpm
+  backend:
     build:
       context: server/docker/nginx
       dockerfile: Dockerfile
+    depends_on:
+      - php-fpm
+    restart: on-failure
     volumes:
       - ./server/public:/app/public
     ports:

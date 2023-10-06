@@ -48,7 +48,7 @@ class Task
 
     #[OAT\Property(ref: "#/components/schemas/user")]
     #[Groups("default")]
-    #[ORM\ManyToOne(inversedBy: 'tasks', targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user;
 
