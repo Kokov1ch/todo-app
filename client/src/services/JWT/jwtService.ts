@@ -5,7 +5,7 @@ export function setJWT(JWTToken: string): void {
     cookies.set('JWT-Token', JWTToken, { path: '/' });
 }
 
-export function getJWT(): void {
+export function getJWT(): string {
     const cookies = new Cookies();
     return cookies.get('JWT-Token');
 }
