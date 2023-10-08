@@ -16,8 +16,8 @@ services:
 
   frontend:
     build:
-      context: client/docker/
-      dockerfile: Dockerfile
+      context: client
+      dockerfile: ./docker/Dockerfile
     restart: on-failure
     volumes:
       - ./client:/app:delegated
