@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mui/material": "^5.14.12",
+    "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,11 +14,16 @@
     "@types/react-dom": "^18.2.7",
     "axios": "^1.5.1",
     "react": "^18.2.0",
+    "react-devtools": "^4.28.4",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.14.2",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.3",
+    "redux": "^4.2.1",
+    "route": "^0.2.5",
+    "router": "^1.3.8",
     "sass": "^1.69.0",
     "scss": "^0.2.4",
     "typescript": "^4.9.5",
@@ -25,10 +32,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node_modules/.bin/react-scripts start",
+    "build": "node_modules/.bin/react-scripts build",
+    "test": "node_modules/.bin/react-scripts test",
+    "eject": "node_modules/.bin/react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

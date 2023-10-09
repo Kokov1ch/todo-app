@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, CancelTokenSource, AxiosResponse } from "axios";
-import CONFIG from "../../config";
+import CONFIG from "../config";
 import router from '../polyfills/router';
 import { getJWT, setJWT, getRefreshToken, setRefreshToken, removeJWT, removeRefreshToken } from '../services/JWT/jwtService';
 import { notifyError, notifySuccess, notifyWarn } from "../components/Toast/SimpleToast";

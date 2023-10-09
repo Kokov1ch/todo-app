@@ -5,7 +5,7 @@ export function setJWT(JWTToken: string): void {
     cookies.set('JWT-Token', JWTToken, { path: '/' });
 }
 
-export function getJWT(): string | undefined {
+export function getJWT(): string {
     const cookies = new Cookies();
     return cookies.get('JWT-Token');
 }
@@ -20,7 +20,7 @@ export function setRefreshToken(refreshToken: string): void {
     cookies.set('refresh_token', refreshToken, { path: '/' });
 }
 
-export function getRefreshToken(): string | undefined {
+export function getRefreshToken(): string {
     const cookies = new Cookies();
     return cookies.get('refresh_token');
 }
