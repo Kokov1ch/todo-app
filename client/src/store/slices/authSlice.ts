@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import Cookies from 'universal-cookie';
-import {authorization} from "../../api";
+import {authorization} from "../../shared/api";
 
 type DataType = {
     token: string,

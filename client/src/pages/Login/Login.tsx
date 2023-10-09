@@ -2,10 +2,9 @@ import React, {useState, useEffect, FC} from 'react';
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router'
 import './Login.scss';
-import { useDispatch, useSelector } from 'react-redux';
 import { getToken, saveToken } from "../../store/slices/authSlice"
-import { getRefreshToken } from "../../services/JWT/jwtService";
-import { refreshingToken } from "../../api";
+import { getRefreshToken } from "../../shared/services/JWT/jwtService";
+import { refreshingToken } from "../../shared/api";
 import {useAppDispatch, useAppSelector} from "../../shared/hooks";
 
 const Login: FC = () => {
