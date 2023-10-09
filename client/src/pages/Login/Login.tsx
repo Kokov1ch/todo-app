@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect, FC} from 'react';
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router'
 import './Login.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, saveToken } from '../../store/slices/authSlice'
+import { getRefreshToken } from "../../services/JWT/jwtService";
+import { refreshingToken } from "../../api";
+import {useAppDispatch, useAppSelector} from "../../shared/hooks";
 
-const Login = () => {
-    const dispatch = useDispatch();
+const Login: FC = () => {
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
     // @ts-ignore
-    const authInfo = useSelector((state) => state.auth.authInfo);
+    const authInfo = useAppSelector((state) => state.auth.authInfo);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    // useEffect(() => {
+    //     let refreshToken = getRefreshToken();
+    //     if (refreshToken) {
+    //         refreshingToken()
+    //             .then(() => {
+    //                 navigate('tasks')
+    //             })
+    //     }
+    // }, [])
 
     const handleLogin = () => {
         // @ts-ignore
@@ -38,7 +51,7 @@ const Login = () => {
             <button type="button" onClick={handleLogin} disabled={authInfo.isLoading}>
                 {authInfo.isLoading ? 'Вход...' : 'Войти'}
             </button>
-            {authInfo.error && <p style={{ color: 'red' }}>{authInfo.error.message}</p>}
+            {authInfo.error && <p style={{ color: 'red' }}>{'Неверный логин или пароль'}</p>}
             <p>
                 Нет учетной записи? <Link to="/signup">Зарегистрируйтесь</Link>
             </p>

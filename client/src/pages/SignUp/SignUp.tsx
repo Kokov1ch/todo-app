@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, {FC, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from "../../shared/hooks";
 import './SignUp.scss';
 
-const SignUp = () => {
+const SignUp: FC = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch()
+
     const [redirectToLogin, setRedirectToLogin] = useState(false);
 
     const handleSignUp = () => {
-        // Здесь можно добавить логику для регистрации пользователя
-        // После успешной регистрации перенаправляем пользователя на главную страницу
         setRedirectToLogin(true);
     };
 
     if (redirectToLogin) {
         navigate('/');
     }
+
 
     return (
         <div className="signup-container">
