@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router'
 import './Login.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { getToken, saveToken } from '../../store/slices/authSlice'
+import { getToken, saveToken } from "../../store/slices/authSlice"
 import { getRefreshToken } from "../../services/JWT/jwtService";
 import { refreshingToken } from "../../api";
 import {useAppDispatch, useAppSelector} from "../../shared/hooks";
@@ -17,15 +17,16 @@ const Login: FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // useEffect(() => {
-    //     let refreshToken = getRefreshToken();
-    //     if (refreshToken) {
-    //         refreshingToken()
-    //             .then(() => {
-    //                 navigate('tasks')
-    //             })
-    //     }
-    // }, [])
+    useEffect(() => {
+        let refreshToken = getRefreshToken();
+        if (refreshToken) {
+            // @ts-ignore
+            refreshingToken()
+                .then(() => {
+                    navigate('tasks')
+                })
+        }
+    }, [])
 
     const handleLogin = () => {
         // @ts-ignore
