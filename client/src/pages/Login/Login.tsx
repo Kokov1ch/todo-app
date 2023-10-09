@@ -27,7 +27,6 @@ const Login = () => {
     return (
         <div className="login-container">
             <h1>Вход</h1>
-            {authInfo.error && <p style={{ color: 'red' }}>{authInfo.error}</p>}
             <div className="input-group">
                 <label htmlFor="username">Имя пользователя</label>
                 <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -39,6 +38,7 @@ const Login = () => {
             <button type="button" onClick={handleLogin} disabled={authInfo.isLoading}>
                 {authInfo.isLoading ? 'Вход...' : 'Войти'}
             </button>
+            {authInfo.error && <p style={{ color: 'red' }}>{authInfo.error.message}</p>}
             <p>
                 Нет учетной записи? <Link to="/signup">Зарегистрируйтесь</Link>
             </p>
