@@ -9,7 +9,7 @@ class UserPreviewer
 {
     #[ArrayShape([
         "id" => "int",
-        "login" => "string",
+        "username" => "string",
         "fio" => "string",
         "email" => "string",
     ])]
@@ -17,7 +17,7 @@ class UserPreviewer
     {
         return [
                 "id" => $user->getId(),
-                "login" => $user->getLogin(),
+                "username" => $user->getLogin(),
                 "fio" => $user->getFio(),
                 "email" => $user->getEmail(),
             ];

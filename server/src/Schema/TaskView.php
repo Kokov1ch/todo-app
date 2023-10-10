@@ -27,10 +27,6 @@ class TaskView
     #[Groups("default", "description")]
     public string $description;
 
-    #[OA\Property(property: "user_id", ref : "#/components/schemas/User/properties/id")]
-    #[Groups("default", "user")]
-    public User $user;
-
     #[OA\Property(property: "start_date", ref : "#/components/schemas/Task/properties/startDate")]
     #[Groups("default", "start_date")]
     public DateTimeInterface $startDate;
@@ -42,5 +38,9 @@ class TaskView
     #[OA\Property(property: "done", ref : "#/components/schemas/Task/properties/done")]
     #[Groups("default", "done")]
     public bool $done;
+
+    #[OA\Property(property: "user", ref : "#/components/schemas/UserView")]
+    #[Groups("default", "user")]
+    public User $user;
 
 }

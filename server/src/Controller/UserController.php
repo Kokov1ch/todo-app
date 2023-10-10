@@ -68,7 +68,7 @@ class UserController extends ApiController
         required: true,
         content: new OA\JsonContent(
             properties:[
-                new OA\Property(property: "login", ref:"#/components/schemas/UserView/properties/login"),
+                new OA\Property(property: "username", ref:"#/components/schemas/UserView/properties/username"),
                 new OA\Property(property: "password", ref:"#/components/schemas/User/properties/password"),
                 new OA\Property(property: "fio",  ref:"#/components/schemas/UserView/properties/fio", nullable:true),
                 new OA\Property(property: "email", ref:"#/components/schemas/UserView/properties/email", nullable:true),
@@ -225,7 +225,7 @@ class UserController extends ApiController
         required: true,
         content: new OA\JsonContent(
             properties:[
-                new OA\Property(property: "login", ref:"#/components/schemas/UserView/properties/login"),
+                new OA\Property(property: "username", ref:"#/components/schemas/UserView/properties/username"),
                 new OA\Property(property: "password", ref:"#/components/schemas/User/properties/password"),
                 new OA\Property(property: "fio",  ref:"#/components/schemas/UserView/properties/fio", nullable:true),
                 new OA\Property(property: "email", ref:"#/components/schemas/UserView/properties/email", nullable:true),
@@ -369,14 +369,14 @@ class UserController extends ApiController
         required: true,
         content: new OA\JsonContent(
             properties:[
-                new OA\Property(property: "login", ref:"#/components/schemas/UserView/properties/login"),
+                new OA\Property(property: "username", ref:"#/components/schemas/UserView/properties/username"),
                 new OA\Property(property: "old_password", ref:"#/components/schemas/User/properties/password"),
                 new OA\Property(property: "new_password", ref:"#/components/schemas/User/properties/password"),
                 new OA\Property(property: "fio",  ref:"#/components/schemas/UserView/properties/fio", nullable:true),
                 new OA\Property(property: "email", ref:"#/components/schemas/UserView/properties/email", nullable:true),
             ],
             example: [
-                "login" => "fedorFet",
+                "username" => "fedorFet",
                 "old_password" => "fedor",
                 "new_password" => "fet",
                 "fio" => "Фет Фёдор Германович",

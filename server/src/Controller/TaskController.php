@@ -57,7 +57,7 @@ class TaskController extends ApiController
         $this->setSoftDeleteable($this->em, false);
 
         $taskPreviews = array_map(
-            fn(Task $task): array => $taskPreviewer->previewWithUserId($task),
+            fn(Task $task): array => $taskPreviewer->preview($task),
             $tasks
         );
 
@@ -73,9 +73,9 @@ class TaskController extends ApiController
             properties:[
                 new OA\Property(property: "name", ref:"#/components/schemas/TaskView/properties/name"),
                 new OA\Property(property: "description", ref:"#/components/schemas/TaskView/properties/description"),
-                new OA\Property(property: "user_id",  ref:"#/components/schemas/User/properties/id"),
                 new OA\Property(property: "start_date", ref:"#/components/schemas/TaskView/properties/start_date", nullable:true),
-                new OA\Property(property:"end_date", ref:"#/components/schemas/TaskView/properties/end_date", nullable:true)
+                new OA\Property(property:"end_date", ref:"#/components/schemas/TaskView/properties/end_date", nullable:true),
+                new OA\Property(property: "user",  ref:"#/components/schemas/TaskView/properties/user"),
             ]
         )
     )]
@@ -217,7 +217,7 @@ class TaskController extends ApiController
 
         $this->setSoftDeleteable($this->em, false);
 
-        return $this->response($taskPreviewer->previewWithUserId($task));
+        return $this->response($taskPreviewer->preview($task));
     }
 
     /**
@@ -229,10 +229,10 @@ class TaskController extends ApiController
             properties:[
                 new OA\Property(property: "name", ref:"#/components/schemas/TaskView/properties/name"),
                 new OA\Property(property: "description", ref:"#/components/schemas/TaskView/properties/description", nullable:true),
-                new OA\Property(property: "user_id",  ref:"#/components/schemas/User/properties/id"),
                 new OA\Property(property: "start_date", ref:"#/components/schemas/TaskView/properties/start_date", nullable:true),
                 new OA\Property(property: "end_date", ref:"#/components/schemas/TaskView/properties/end_date", nullable:true),
-                new OA\Property(property: "done", ref:"#/components/schemas/TaskView/properties/done")
+                new OA\Property(property: "done", ref:"#/components/schemas/TaskView/properties/done"),
+                new OA\Property(property: "user",  ref:"#/components/schemas/TaskView/properties/user")
             ]
         )
     )]

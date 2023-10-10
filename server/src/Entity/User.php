@@ -30,6 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id;
 
     #[ORM\Column(length: 36)]
+    #[OA\Property()]
     private ?string $login;
 
     #[ORM\Column(length: 255)]
@@ -87,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    #[OA\Property(property:"login")]
+    #[OA\Property(property:"username")]
     #[Groups("default")]
     public function getLogin(): ?string
     {

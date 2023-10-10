@@ -14,9 +14,9 @@ class UserView
     public int $id;
 
     #[Property(example: "login1")]
-    #[OA\Property(property: "login", ref : "#/components/schemas/User/properties/login")]
-    #[Groups("default", "login")]
-    public string $login;
+    #[OA\Property(property: "username", ref : "#/components/schemas/User/properties/username")]
+    #[Groups("default", "username")]
+    public string $username;
 
     #[Property(example: "Харитонов Игнатий Иванович")]
     #[OA\Property(property: "fio", ref : "#/components/schemas/User/properties/fio")]

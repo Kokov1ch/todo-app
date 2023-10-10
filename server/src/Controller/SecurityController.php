@@ -7,6 +7,7 @@ use App\Previewer\UserPreviewer;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -44,7 +45,8 @@ class SecurityController extends ApiController
     #[Route(name: '', methods: ['POST'])]
     public function registration(Request                     $request,
                                  UserPasswordHasherInterface $passwordEncoder,
-                                 ValidatorInterface          $validator): JsonResponse
+                                 ValidatorInterface          $validator,
+                                 JWTTokenManagerInterface    $jwtManager): JsonResponse
     {
         $request = $request->toArray();
         try {
