@@ -96,7 +96,7 @@ class UserController extends ApiController
         $request = $request->toArray();
         try {
             $this->setSoftDeleteable($this->em, false);
-            $user = $this->userRepository->findOneBy(['login' => $request['login']]);
+            $user = $this->userRepository->findOneBy(['login' => $request['username']]);
             if ($user) {
                 if ($user->getDeletedAt()) {
                     $user->setDeletedAt(null);
@@ -110,7 +110,7 @@ class UserController extends ApiController
             }
             $user = new User();
 
-            $user->setLogin($request['login']);
+            $user->setLogin($request['username']);
 
             if (isset($request['fio'])) {
                 $user->setFio($request['fio']);
@@ -263,12 +263,12 @@ class UserController extends ApiController
         $request = $request->toArray();
 
         try {
-            if (isset($request['login'])) {
-                $login = $request['login'];
+            if (isset($request['username'])) {
+                $login = $request['username'];
                 if (!$login) {
                     throw new Exception();
                 }
-                if ($this->userRepository->findOneBy(['login' => $request['login']])) {
+                if ($this->userRepository->findOneBy(['username' => $request['username']])) {
                     return $this->respondValidationError('User with this login is already exist');
                 }
 
@@ -406,15 +406,15 @@ class UserController extends ApiController
         $user = $this->getUserEntity($this->userRepository);
         $request = $request->toArray();
         try {
-            if (isset($request['login'])) {
+            if (isset($request['username'])) {
                 $userRepository = $this->em->getRepository(User::class);
-                $userExist = (bool)$userRepository->findOneBy(['login' => $request['login']]);
+                $userExist = (bool)$userRepository->findOneBy(['username' => $request['username']]);
 
-                if ($userExist && $user->getUserIdentifier() != $request['login']) {
+                if ($userExist && $user->getUserIdentifier() != $request['username']) {
                     return $this->respondValidationError('User with this login is already exist');
                 }
 
-                $user->setLogin($request['login']);
+                $user->setLogin($request['username']);
             }
 
             if (isset($request['fio'])) {
