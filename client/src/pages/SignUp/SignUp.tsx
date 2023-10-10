@@ -26,8 +26,12 @@ const SignUp: FC = () => {
                 <input type="text" id="username" />
             </div>
             <div className="input-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">ФИО</label>
                 <input type="text" id="email" />
+            </div>
+            <div className="input-group">
+                <label htmlFor="fio">Email</label>
+                <input type="text" id="fio" />
             </div>
             <div className="input-group">
                 <label htmlFor="password">Пароль</label>

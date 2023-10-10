@@ -15,7 +15,7 @@ nelmio_api_doc:
         servers:
             - url: /
         tags:
-            - name: Login Check
+            - name: Security
             - name: User
             - name: Task
         info:
@@ -32,7 +32,7 @@ nelmio_api_doc:
                 post:
                     security: [ ]
                     tags:
-                        - Login Check
+                        - Security
                     summary: Get a JWT and refresh token using login and password
                     requestBody:
                         content:
@@ -40,11 +40,35 @@ nelmio_api_doc:
                                 schema:
                                     type: object
                                     properties:
-                                        username:
+                                        login:
                                             example: "admin"
                                             type: string
                                         password:
                                             example: "admin"
+                                            type: string
+            /api/registration:
+                post:
+                    security: [ ]
+                    tags:
+                        - Security
+                    summary: Register a new user
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        login:
+                                            example: "fedor"
+                                            type: string
+                                        fio:
+                                            example: "Фет Фёдор Сергеевич"
+                                            type: string
+                                        email:
+                                            example: "fedorfet@gmail.com"
+                                            type: string
+                                        password:
+                                            example: "fedorPass"
                                             type: string
 
         components:

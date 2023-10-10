@@ -86,7 +86,7 @@ class UserController extends ApiController
     )]
     #[OA\Response(
         response: 422,
-        description: "Unprocessable Content"
+        description: "Unprocessable content"
     )]
     #[Route(name: 'post', methods: ['POST'])]
     public function postUser(Request                     $request,
@@ -111,7 +111,6 @@ class UserController extends ApiController
             $user = new User();
 
             $user->setLogin($request['login']);
-            $user->setPassword($request['password']);
 
             if (isset($request['fio'])) {
                 $user->setFio($request['fio']);
@@ -123,14 +122,14 @@ class UserController extends ApiController
                 $user->setEmail($request['email']);
             }
 
-            if (count($validator->validate($user)) !== 0) return $this->respondValidationError();
+            $user->setPassword(
+                $passwordEncoder->hashPassword(
+                    $user,
+                    $request['password']
+                )
+            );
 
-                $user->setPassword(
-                    $passwordEncoder->hashPassword(
-                        $user,
-                        $request['password']
-                    )
-                );
+            if (count($validator->validate($user)) !== 0) return $this->respondValidationError();
 
                 $this->em->persist($user);
                 $this->em->flush();
